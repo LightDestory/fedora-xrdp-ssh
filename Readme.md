@@ -12,13 +12,13 @@ It is based on KDE and you can connect to it using SSH and any RDP client, thank
 First of all, build the image running:
 
 ```bash
-docker build . --name fedoraxrdpssh
+docker build . --name fedora-xrdp-ssh
 ```
 
-Then create a new container running:
+Then create a new container running (remove `ghcr.io/lightdestory/` if you want to use your local image):
 
 ```bash
-docker run -d --name capybara --shm-size 1g -p 3389:3389 -p 2222:22 fedoraxrdpssh:latest <root-password>
+docker run -d --name capybara --shm-size 1g -p 3389:3389 -p 2222:22 ghcr.io/lightdestory/fedora-xrdp-ssh:master <root-password>
 ```
 
 **Notes:**
