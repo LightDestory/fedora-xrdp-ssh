@@ -6,8 +6,8 @@ RUN dnf -y update
 
 # extra repos
 RUN rpm -Uhv https://mkvtoolnix.download/fedora/bunkus-org-repo-2-4.noarch.rpm && \
-    dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm && \
-    dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+  dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm && \
+  dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 RUN dnf -y install \
   @kde-desktop \
@@ -42,9 +42,12 @@ RUN dnf -y install \
   python3-pip \
   ffmpeg \
   ffmpeg-libs \
+  ffmpeg-devel \
+  qt5-qtbase-devel \
   vlc \
   amule \
   qt5pas
+
 
 RUN dnf -y remove akregator kmail kaddressbook korganizer kwalletmanager kmouth kmousetool kde-partitionmanager plasma-discover dnfdragora firewall-config qt5-qdbusviewer kcalc kde-print-manager kde-settings-pulseaudio plasma-thunderbolt bluez colord-kde spectacle kcharselect kf5-akonadi-server
 
@@ -75,8 +78,8 @@ RUN pip3 install pysubs2
 
 WORKDIR /tmp
 RUN dnf config-manager --add-repo https://raw.githubusercontent.com/filebot/plugins/master/yum/main.repo && \
-    dnf config-manager --set-enabled filebot --dump && \
-    dnf install -y zenity filebot
+  dnf config-manager --set-enabled filebot --dump && \
+  dnf install -y zenity filebot
 
 # RenameMyTVSeries
 
@@ -85,13 +88,30 @@ RUN wget https://www.tweaking4all.com/downloads/betas/RenameMyTVSeries-2.1.8-QT5
   mkdir /usr/share/RenameMyTVSeries && \
   tar -zxvf RenameMyTVSeries-2.1.8-QT5-beta-Linux-64bit-shared-ffmpeg.tar.gz -C /usr/share/RenameMyTVSeries
 
+# MakeMKV
+
+WORKDIR /tmp
+RUN wget https://www.makemkv.com/download/makemkv-bin-1.17.0.tar.gz && \
+  wget https://www.makemkv.com/download/makemkv-oss-1.17.0.tar.gz && \
+  tar -xvf makemkv-bin-1.17.0.tar.gz && \
+  tar -xvf makemkv-oss-1.17.0.tar.gz && \
+  cd ./makemkv-oss-1.17.0 && \
+  ./configure && \
+  make && \
+  make install && \
+  cd ../makemkv-bin-1.17.0 && \
+  mkdir -p "tmp" && \
+  echo "accepted" >> "tmp/eula_accepted" && \
+  make && \
+  make install
+
 # Fix for VLC as root
 
 RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc 
 
 # Post-install configuration
 
-RUN rm /tmp/*
+RUN rm -r /tmp/*
 
 RUN bash -c 'echo PREFERRED=/usr/bin/startplasma-x11 > /etc/sysconfig/desktop'
 
