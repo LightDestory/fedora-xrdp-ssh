@@ -14,7 +14,7 @@ RUN dnf -y install \
   xrdp \
   xorgxrdp \
   passwd \
-  nano \
+  nano-default-editor \
   ncurses \
   openssh-server \
   less \
@@ -49,7 +49,7 @@ RUN dnf -y install \
   qt5pas
 
 
-RUN dnf -y remove akregator kmail kaddressbook korganizer kwalletmanager kmouth kmousetool kde-partitionmanager plasma-discover dnfdragora firewall-config qt5-qdbusviewer kcalc kde-print-manager kde-settings-pulseaudio plasma-thunderbolt bluez colord-kde spectacle kcharselect kf5-akonadi-server
+RUN dnf -y remove akregator kmail kaddressbook korganizer kwalletmanager kmouth kmousetool kde-partitionmanager plasma-discover dnfdragora firewall-config qt5-qdbusviewer kcalc kde-print-manager kde-settings-pulseaudio plasma-thunderbolt bluez colord-kde spectacle kcharselect kf5-akonadi-server plasma-nm plasma-workspace-geolocation plasma-pa plasma-drkonqi plasma-desktop-doc ksshaskpass kdeplasma-addons pipewire kmag abrt anaconda-core plasma-vault plasma-browser-integration pinentry kinfocenter khelpcenter smartmontools speech-dispatcher
 
 RUN dnf -y autoremove && dnf clean all
 
