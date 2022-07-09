@@ -2,7 +2,7 @@
 
 :warning: _This repository is related to something that I use on a private stuff, it is not aimed for a public usage. Use it at your risk!_
 
-This dockerfile contains a Fedora 36 image with some tools needed for generic operations related to multimedia handling. It comes with mkvtoolnix, RenameMyTvSeries (beta), filebot, ffmpeg, KRename, aria2, vlc, mediainfo, filezilla and so on.
+This dockerfile contains a Fedora 36 image with some tools needed for generic operations related to multimedia handling. It comes with mkvtoolnix, RenameMyTvSeries (beta), filebot, ffmpeg, KRename, aria2, vlc, mediainfo, filezilla, makemkv and so on.
 
 It is based on KDE and you can connect to it using SSH and any RDP client, thanks to xrdp.
 
