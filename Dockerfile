@@ -32,7 +32,7 @@ RUN dnf -y install \
   mkvtoolnix \
   mkvtoolnix-gui \
   fish \ 
-  chromium \
+  firefox \
   openssl-devel\ 
   zlib-devel \
   expat-devel \
@@ -43,9 +43,10 @@ RUN dnf -y install \
   ffmpeg \
   ffmpeg-libs \
   vlc \
-  amule
+  amule \
+  qt5pas
 
-RUN dnf -y remove akregator kmail kaddressbook korganizer kwalletmanager kmouth kmousetool kde-partitionmanager plasma-discover dnfdragora firewall-config qt5-qdbusviewer
+RUN dnf -y remove akregator kmail kaddressbook korganizer kwalletmanager kmouth kmousetool kde-partitionmanager plasma-discover dnfdragora firewall-config qt5-qdbusviewer kcalc kde-print-manager kde-settings-pulseaudio plasma-thunderbolt bluez colord-kde spectacle kcharselect kf5-akonadi-server
 
 RUN dnf -y autoremove && dnf clean all
 
@@ -89,6 +90,8 @@ RUN wget https://www.tweaking4all.com/downloads/betas/RenameMyTVSeries-2.1.8-QT5
 RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc 
 
 # Post-install configuration
+
+RUN rm /tmp/*
 
 RUN bash -c 'echo PREFERRED=/usr/bin/startplasma-x11 > /etc/sysconfig/desktop'
 
