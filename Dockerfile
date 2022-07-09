@@ -77,7 +77,8 @@ RUN pip3 install pysubs2
 # Filebot
 
 WORKDIR /tmp
-RUN dnf config-manager --add-repo https://raw.githubusercontent.com/filebot/plugins/master/yum/main.repo && \
+RUN dnf -y install dnf-plugins-core && \ 
+  config-manager --add-repo https://raw.githubusercontent.com/filebot/plugins/master/yum/main.repo && \
   dnf config-manager --set-enabled filebot --dump && \
   dnf install -y zenity filebot
 
