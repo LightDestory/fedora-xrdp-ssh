@@ -1,9 +1,6 @@
 #!/bin/sh
 
-if [ -r /etc/default/locale ]; then
-  . /etc/default/locale
-  export LANG LANGUAGE
-fi
+export LANG=it_IT.UTF-8
 
-# KDE
-startplasma-x11
+# XFCE session
+startxfce4

@@ -20,4 +20,4 @@ mkdir -p "/root/Desktop"
 cp /usr/share/RenameMyTVSeries/RenameMyTVSeries.desktop "/root/Desktop/"
 mkdir -p /var/run/sshd
 echo -e "Init complete!\n"
-exec "supervisord"
+supervisord -c /etc/supervisord.conf -n
