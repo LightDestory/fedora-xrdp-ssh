@@ -12,6 +12,11 @@ if [[ $# -ne 1 ]]; then
     echo "The container requires 1 input parameters: <password>"
     exit
 fi
+if [ ! -f "/etc/ssh/ssh_host_dsa_key" ];
+	then
+		ssh-keygen -A
+fi
+
 echo "Customizing root"
 echo root:$1 | chpasswd
 wait
@@ -19,5 +24,16 @@ echo "Adding desktop shortcuts"
 mkdir -p "/root/Desktop"
 cp /usr/share/RenameMyTVSeries/RenameMyTVSeries.desktop "/root/Desktop/"
 mkdir -p /var/run/sshd
+rm -rf /var/run/xrdp-sesman.pid
+rm -rf /var/run/xrdp.pid
+rm -rf /var/run/xrdp/xrdp-sesman.pid
+rm -rf /var/run/xrdp/xrdp.pid
 echo -e "Init complete!\n"
+if [ -z ${LANGUAGE} ]; then 
+    echo "No custom language set"
+else
+    echo "Custom language set" 
+    echo "LANG=$LANGUAGE.UTF-8" > /etc/locale.conf
+    localedef -c -i $LANGUAGE -f UTF-8 $LANGUAGE.UTF-8
+fi
 supervisord -c /etc/supervisord.conf -n

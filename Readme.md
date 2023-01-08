@@ -21,6 +21,11 @@ Then create a new container running (remove `ghcr.io/lightdestory/` if you want 
 docker run -d --name capybara --shm-size 3g -p 3389:3389 -p 2222:22 ghcr.io/lightdestory/fedora-xrdp-ssh:master <root-password>
 ```
 
+If you want to set a specific language use a `lang_code` like `it_IT`, run:
+```bash
+docker run -d --name capybara --shm-size 3g -p 3389:3389 -p 2222:22 --env LANGUAGE=it_IT ghcr.io/lightdestory/fedora-xrdp-ssh:master <root-password>
+```
+
 **Notes:**
 
 - It is important to use the `--shm-size 3g` or the web browsers will crash;

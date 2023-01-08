@@ -1,9 +1,12 @@
 FROM fedora:latest
 
-RUN dnf -y update
+RUN dnf -y update \
+    && dnf -y install glibc-locale-source \
+    && localedef -c -i en_US -f UTF-8 en_US.UTF-8 \
+    && echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 # extra repos
-RUN rpm -Uhv https://mkvtoolnix.download/fedora/bunkus-org-repo-2-4.noarch.rpm && dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+RUN dnf -y reinstall glibc-common && rpm -Uhv https://mkvtoolnix.download/fedora/bunkus-org-repo-2-4.noarch.rpm && dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 RUN dnf -y install \
     langpacks-it \
@@ -111,9 +114,7 @@ COPY ./miscs/run.sh /
 
 RUN chmod +x /run.sh
 
-RUN rm /etc/xdg/autostart/xfce-polkit.desktop
-
-RUN ssh-keygen -A
+RUN rm /etc/xdg/autostart/xfce-polkit.desktop /etc/xdg/autostart/geoclue-demo-agent.desktop /etc/xdg/autostart/tracker-miner-rss-3.desktop
 
 EXPOSE 3389 22
 
