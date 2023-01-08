@@ -22,6 +22,7 @@ docker run -d --name capybara --shm-size 3g -p 3389:3389 -p 2222:22 ghcr.io/ligh
 ```
 
 If you want to set a specific language use a `lang_code` like `it_IT`, run:
+
 ```bash
 docker run -d --name capybara --shm-size 3g -p 3389:3389 -p 2222:22 --env LANGUAGE=it_IT ghcr.io/lightdestory/fedora-xrdp-ssh:master <root-password>
 ```

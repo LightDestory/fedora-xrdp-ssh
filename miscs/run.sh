@@ -12,17 +12,19 @@ if [[ $# -ne 1 ]]; then
     echo "The container requires 1 input parameters: <password>"
     exit
 fi
-if [ ! -f "/etc/ssh/ssh_host_dsa_key" ];
-	then
-		ssh-keygen -A
+if [ ! -f "/etc/ssh/ssh_host_dsa_key" ];then
+    echo "No SSH keys found, generating..."
+	ssh-keygen -A
 fi
-
 echo "Customizing root"
 echo root:$1 | chpasswd
+chsh -s /bin/fish root
 wait
-echo "Adding desktop shortcuts"
-mkdir -p "/root/Desktop"
-cp /usr/share/RenameMyTVSeries/RenameMyTVSeries.desktop "/root/Desktop/"
+if [ ! -f "/root/Desktop/RenameMyTVSeries.desktop" ];then
+    echo "Adding desktop shortcuts"
+    mkdir -p "/root/Desktop"
+    cp /usr/share/RenameMyTVSeries/RenameMyTVSeries.desktop "/root/Desktop/"
+fi
 mkdir -p /var/run/sshd
 rm -rf /var/run/xrdp-sesman.pid
 rm -rf /var/run/xrdp.pid

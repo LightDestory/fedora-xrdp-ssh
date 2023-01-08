@@ -60,7 +60,9 @@ RUN dnf -y install \
     libcap-devel \
     libattr-devel \
     qt5-qtbase-devel \
-    qt5pas
+    qt5pas \
+    rsync \
+    util-linux-user
 
 RUN dnf -y remove pipewire
 
