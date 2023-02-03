@@ -6,7 +6,7 @@ RUN dnf -y update \
     && echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 # extra repos
-RUN dnf -y reinstall glibc-common && rpm -Uhv https://mkvtoolnix.download/fedora/bunkus-org-repo-2-4.noarch.rpm && dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-36-1.noarch.rpm
+RUN dnf -y reinstall glibc-common && rpm -Uhv https://mkvtoolnix.download/fedora/bunkus-org-repo-2-4.noarch.rpm && dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 RUN dnf -y install \
     langpacks-it \
@@ -63,7 +63,11 @@ RUN dnf -y install \
     qt5pas \
     rsync \
     util-linux-user \
-    ultracopier
+    libogg-devel \
+    qt5-qtmultimedia-devel \
+    qt5-linguist \
+    qt5-qtbase-devel \
+    git
 
 RUN dnf -y remove pipewire
 
