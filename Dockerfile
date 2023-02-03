@@ -93,15 +93,15 @@ RUN wget https://www.tweaking4all.com/downloads/betas/RenameMyTVSeries-2.1.7-GTK
 # MakeMKV
 
 WORKDIR /tmp
-RUN wget https://www.makemkv.com/download/makemkv-bin-1.17.2.tar.gz && \
-  wget https://www.makemkv.com/download/makemkv-oss-1.17.2.tar.gz && \
-  tar -xvf makemkv-bin-1.17.2.tar.gz && \
-  tar -xvf makemkv-oss-1.17.2.tar.gz && \
-  cd ./makemkv-oss-1.17.2 && \
+RUN wget https://www.makemkv.com/download/makemkv-bin-1.17.3.tar.gz && \
+  wget https://www.makemkv.com/download/makemkv-oss-1.17.3.tar.gz && \
+  tar -xvf makemkv-bin-1.17.3.tar.gz && \
+  tar -xvf makemkv-oss-1.17.3.tar.gz && \
+  cd ./makemkv-oss-1.17.3 && \
   ./configure && \
   make && \
   make install && \
-  cd ../makemkv-bin-1.17.2 && \
+  cd ../makemkv-bin-1.17.3 && \
   mkdir -p "tmp" && \
   echo "accepted" >> "tmp/eula_accepted" && \
   make && \
